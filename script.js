@@ -1,7 +1,7 @@
 const questions = [
     {
         questions: "Whats the Toughest stone",
-        answers:[
+        answer:[
             {text:"Diamonds",correct: false},
             {text:"Gold",correct: true},
             {text:"Saphire",correct: false},
@@ -10,7 +10,7 @@ const questions = [
     },
     {
         questions: "Whats the most expensive mineral",
-        answers:[
+        answer:[
             {text:"cobalt",correct: false},
             {text:"Jadeite",correct: true},
             {text:"painite",correct: false},
@@ -18,16 +18,16 @@ const questions = [
         ]  
     },
     {
-        questions: "Who discoverd black holes",
-        answers:[
+        question: "Who discoverd black holes",
+        answer:[
             {text:"Luke Harret",correct: false},
             {text:"John Michell",correct: true},
-            {text:"Gerald holmes",correct: true},
+            {text:"Gerald holmes",correct: false},
             {text:"lambert john",correct: false},
         ]
     },
     {
-        questions: "Whats the world largest salt water inland lake",
+        question: "Whats the world largest salt water inland lake",
         answers:[
             {text:"Lake van",correct: false},
             {text:"Lake Urmia",correct: false},
@@ -38,5 +38,29 @@ const questions = [
 ];
 
 const questionElement =document.getElementById("question");
-const questionButton = document.getElementById("answer-buttons");
+const answerButton = document.getElementById("answer-buttons");
 const nextButton = document.getElementById("next-btn");
+
+let currentQuestionIndex = 0;
+let score = '0';
+
+function startQuiz(){
+    currentQuestionIndex=0;
+    score=0;
+    nextButton.innerHTML = "Next"
+    showQuestion();
+}
+function showQuestion() {
+    let currentQuestion = questions[currentQuestionIndex];
+    let questionNo = currentQuestionIndex + 1;
+    questionElement.innerHTML = questionNo + ". " + currentQuestion.questions;
+
+    currentQuestion.answers.forEach(answer => {
+        const button = document.createElement("button");
+        button.innerHTML = answer.text;
+        button.classList.add("btn");
+        answerButton.appendChild(button); // Make sure this is defined
+    });
+}
+
+startQuiz();
